@@ -6,20 +6,22 @@ type ArtistInfo struct {
 }
 
 func selectionSort(artists []ArtistInfo) []ArtistInfo {
-	for index, value := range artists {
+	artistsCopy := make([]ArtistInfo, len(artists))
+	copy(artistsCopy, artists)
+	for index, value := range artistsCopy {
 		lessPlayedArtist := value
 		indexToReplace := index
-		for auxIndex := index + 1; auxIndex < len(artists); auxIndex++ {
-			if lessPlayedArtist.playCount > artists[auxIndex].playCount {
-				lessPlayedArtist = artists[auxIndex]
+		for auxIndex := index + 1; auxIndex < len(artistsCopy); auxIndex++ {
+			if lessPlayedArtist.playCount > artistsCopy[auxIndex].playCount {
+				lessPlayedArtist = artistsCopy[auxIndex]
 				indexToReplace = auxIndex
 			}
 		}
 
-		aux := artists[indexToReplace]
-		artists[indexToReplace] = artists[index]
-		artists[index] = aux
+		aux := artistsCopy[indexToReplace]
+		artistsCopy[indexToReplace] = artistsCopy[index]
+		artistsCopy[index] = aux
 	}
 
-	return artists
+	return artistsCopy
 }
