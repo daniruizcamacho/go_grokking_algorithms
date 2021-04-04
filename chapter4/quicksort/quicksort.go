@@ -51,3 +51,34 @@ func quicksortLastElementPivot(values []int) []int {
 	result = append(result, quicksortLastElementPivot(greater)...)
 	return result
 }
+
+func quicksortRandomElementPivot(values []int) []int {
+	var less, greater, result []int
+	valuesCopy := make([]int, len(values))
+	copy(valuesCopy, values)
+
+	if len(valuesCopy) < 2 {
+		return valuesCopy
+	}
+
+	pivotKey := len(valuesCopy) - 1
+	pivot := valuesCopy[pivotKey]
+	for key, value := range valuesCopy {
+		if pivotKey == key {
+			continue
+		}
+
+		if value <= pivot {
+			less = append(less, value)
+		}
+
+		if value > pivot {
+			greater = append(greater, value)
+		}
+	}
+
+	result = append(result, quicksortRandomElementPivot(less)...)
+	result = append(result, pivot)
+	result = append(result, quicksortRandomElementPivot(greater)...)
+	return result
+}
