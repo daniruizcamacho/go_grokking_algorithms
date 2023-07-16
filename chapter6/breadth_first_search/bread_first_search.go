@@ -8,14 +8,6 @@ func (g *graph) init() {
 	g.adjacencyList = make(map[string][]string)
 }
 
-func (g *graph) addElementWithConnections(element string, connections []string) {
-	if nil == g.adjacencyList {
-		g.init()
-	}
-
-	g.adjacencyList[element] = connections
-}
-
 func (g *graph) FindRelationFrom(start, end string) bool {
 	if nil == g.adjacencyList {
 		return false
